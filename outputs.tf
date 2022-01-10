@@ -15,14 +15,6 @@ output "directory_info" {
   }
 }
 
-/*
-
-
-
-
-
-*/
-
 output "file_system" {
   value       = aws_fsx_windows_file_system.this
   description = "The aws_fsx_windows_file_system resource"
