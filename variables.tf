@@ -16,6 +16,7 @@ variable "ad_name" {
 variable "ad_password_ssm_parameter_name" {
   type        = string
   description = "Name of SSM parameter to store the AD administrator password"
+  default = "/ad/password"
 }
 
 variable "kms_key_deletion_window_in_days" {
