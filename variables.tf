@@ -10,7 +10,7 @@ variable "subnet_ids" {
 
 variable "ad_name" {
   type        = string
-  description = "AD name"
+  description = "AD name (FQDN), in the format `directory.example.com`"
 }
 
 variable "ad_password_ssm_parameter_name" {

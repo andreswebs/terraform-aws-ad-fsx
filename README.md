@@ -25,7 +25,7 @@ module "fsx" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ad_name"></a> [ad\_name](#input\_ad\_name) | AD name | `string` | n/a | yes |
+| <a name="input_ad_name"></a> [ad\_name](#input\_ad\_name) | AD name (FQDN), in the format `directory.example.com` | `string` | n/a | yes |
 | <a name="input_ad_password_ssm_parameter_name"></a> [ad\_password\_ssm\_parameter\_name](#input\_ad\_password\_ssm\_parameter\_name) | Name of SSM parameter to store the AD administrator password | `string` | `"/ad/password"` | no |
 | <a name="input_kms_key_deletion_window_in_days"></a> [kms\_key\_deletion\_window\_in\_days](#input\_kms\_key\_deletion\_window\_in\_days) | KMS key deletion window in days | `number` | `30` | no |
 | <a name="input_kms_key_enable_rotation"></a> [kms\_key\_enable\_rotation](#input\_kms\_key\_enable\_rotation) | Enable KMS key rotation? | `bool` | `true` | no |
