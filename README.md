@@ -42,6 +42,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_directory"></a> [directory](#output\_directory) | The aws\_directory\_service resource |
+| <a name="output_directory_info"></a> [directory\_info](#output\_directory\_info) | Non-sensitive info from the aws\_directory\_service\_directory resource |
 | <a name="output_file_system"></a> [file\_system](#output\_file\_system) | The aws\_fsx\_windows\_file\_system resource |
 
 ## Providers
