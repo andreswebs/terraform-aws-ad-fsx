@@ -141,12 +141,16 @@ resource "aws_security_group" "fsx" {
 
 }
 
+locals {
+  fsx_subnet_ids = var.fsx_deployment_type == "MULTI_AZ_1" ? var.subnet_ids : [var.subnet_ids[0]]
+}
+
 resource "aws_fsx_windows_file_system" "this" {
   deployment_type     = var.fsx_deployment_type
   storage_type        = var.fsx_storage_type
   active_directory_id = aws_directory_service_directory.this.id
-  subnet_ids          = var.subnet_ids
-  preferred_subnet_id = var.subnet_ids[0]
+  subnet_ids          = local.fsx_subnet_ids
+  preferred_subnet_id = local.fsx_subnet_ids[0]
   kms_key_id          = aws_kms_key.this.arn
   security_group_ids  = [aws_security_group.fsx.id]
   storage_capacity    = var.fsx_storage_capacity
