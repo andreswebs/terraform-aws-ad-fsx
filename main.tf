@@ -142,13 +142,19 @@ resource "aws_security_group" "fsx" {
 }
 
 resource "aws_fsx_windows_file_system" "this" {
-  deployment_type     = "MULTI_AZ_1"
+  deployment_type     = var.fsx_deployment_type
+  storage_type        = var.fsx_storage_type
   active_directory_id = aws_directory_service_directory.this.id
   subnet_ids          = var.subnet_ids
   preferred_subnet_id = var.subnet_ids[0]
   kms_key_id          = aws_kms_key.this.arn
   security_group_ids  = [aws_security_group.fsx.id]
-  storage_capacity    = 32
-  throughput_capacity = 8
-  skip_final_backup   = true
+  storage_capacity    = var.fsx_storage_capacity
+  throughput_capacity = var.fsx_throughput_capacity
+  skip_final_backup   = var.fsx_skip_final_backup
+
+  tags = {
+    Name = var.fsx_file_system_name
+  }
+
 }

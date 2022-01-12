@@ -16,7 +16,7 @@ variable "ad_name" {
 variable "ad_password_ssm_parameter_name" {
   type        = string
   description = "Name of SSM parameter to store the AD administrator password"
-  default = "/ad/password"
+  default     = "/ad/password"
 }
 
 variable "kms_key_deletion_window_in_days" {
@@ -35,4 +35,48 @@ variable "kms_key_name" {
   type        = string
   description = "KMS key name, appended to `alias/`"
   default     = "fsx-key"
+}
+
+variable "fsx_file_system_name" {
+  type        = string
+  description = "Name of the FSx Windows file system"
+  default     = "file-system"
+}
+
+variable "fsx_deployment_type" {
+  type = string
+  description = "FSx deployment type"
+  default = "MULTI_AZ_1"
+  validation {
+    condition     = can(regex("^SINGLE_AZ_1|SINGLE_AZ_2|MULTI_AZ_1$", var.loki_mode))
+    error_message = "Must be one of `SINGLE_AZ_1` or `SINGLE_AZ_2` or `MULTI_AZ_1`."
+  }
+}
+
+variable "fsx_storage_type" {
+  type = string
+  description = "FSx storage type"
+  default = "SSD"
+   validation {
+    condition     = can(regex("^SSD|HDD$", var.loki_mode))
+    error_message = "Must be one of `SSD` or `HDD`."
+  } 
+}
+
+variable "fsx_skip_final_backup" {
+  type        = bool
+  description = "Skip final FSx backup?"
+  default     = true
+}
+
+variable "fsx_storage_capacity" {
+  type        = number
+  description = "FSx Storage capacity"
+  default     = 32
+}
+
+variable "fsx_throughput_capacity" {
+  type        = number
+  description = "FSx throughput capacity"
+  default     = 8
 }

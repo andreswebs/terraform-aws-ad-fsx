@@ -27,6 +27,12 @@ module "fsx" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_ad_name"></a> [ad\_name](#input\_ad\_name) | AD name (FQDN), in the format `directory.example.com` | `string` | n/a | yes |
 | <a name="input_ad_password_ssm_parameter_name"></a> [ad\_password\_ssm\_parameter\_name](#input\_ad\_password\_ssm\_parameter\_name) | Name of SSM parameter to store the AD administrator password | `string` | `"/ad/password"` | no |
+| <a name="input_fsx_deployment_type"></a> [fsx\_deployment\_type](#input\_fsx\_deployment\_type) | FSx deployment type | `string` | `"MULTI_AZ_1"` | no |
+| <a name="input_fsx_file_system_name"></a> [fsx\_file\_system\_name](#input\_fsx\_file\_system\_name) | Name of the FSx Windows file system | `string` | `"file-system"` | no |
+| <a name="input_fsx_skip_final_backup"></a> [fsx\_skip\_final\_backup](#input\_fsx\_skip\_final\_backup) | Skip final FSx backup? | `bool` | `true` | no |
+| <a name="input_fsx_storage_capacity"></a> [fsx\_storage\_capacity](#input\_fsx\_storage\_capacity) | FSx Storage capacity | `number` | `32` | no |
+| <a name="input_fsx_storage_type"></a> [fsx\_storage\_type](#input\_fsx\_storage\_type) | FSx storage type | `string` | `"SSD"` | no |
+| <a name="input_fsx_throughput_capacity"></a> [fsx\_throughput\_capacity](#input\_fsx\_throughput\_capacity) | FSx throughput capacity | `number` | `8` | no |
 | <a name="input_kms_key_deletion_window_in_days"></a> [kms\_key\_deletion\_window\_in\_days](#input\_kms\_key\_deletion\_window\_in\_days) | KMS key deletion window in days | `number` | `30` | no |
 | <a name="input_kms_key_enable_rotation"></a> [kms\_key\_enable\_rotation](#input\_kms\_key\_enable\_rotation) | Enable KMS key rotation? | `bool` | `true` | no |
 | <a name="input_kms_key_name"></a> [kms\_key\_name](#input\_kms\_key\_name) | KMS key name, appended to `alias/` | `string` | `"fsx-key"` | no |
