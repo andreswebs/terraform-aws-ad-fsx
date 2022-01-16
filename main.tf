@@ -162,3 +162,9 @@ resource "aws_fsx_windows_file_system" "this" {
   }
 
 }
+
+resource "aws_ssm_parameter" "fsx_ip_address" {
+  name  = var.fsx_ip_address_ssm_parameter_name
+  type  = "SecureString"
+  value = base64encode(aws_fsx_windows_file_system.this.preferred_file_server_ip)
+}

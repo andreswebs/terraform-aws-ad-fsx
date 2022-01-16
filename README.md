@@ -29,6 +29,7 @@ module "fsx" {
 | <a name="input_ad_password_ssm_parameter_name"></a> [ad\_password\_ssm\_parameter\_name](#input\_ad\_password\_ssm\_parameter\_name) | Name of SSM parameter to store the AD administrator password | `string` | `"/ad/password"` | no |
 | <a name="input_fsx_deployment_type"></a> [fsx\_deployment\_type](#input\_fsx\_deployment\_type) | FSx deployment type | `string` | `"SINGLE_AZ_2"` | no |
 | <a name="input_fsx_file_system_name"></a> [fsx\_file\_system\_name](#input\_fsx\_file\_system\_name) | Name of the FSx Windows file system | `string` | `"file-system"` | no |
+| <a name="input_fsx_ip_address_ssm_param_name"></a> [fsx\_ip\_address\_ssm\_param\_name](#input\_fsx\_ip\_address\_ssm\_param\_name) | Name of SSM parameter to store the file system IP address | `string` | `"/fsx/ip-address"` | no |
 | <a name="input_fsx_skip_final_backup"></a> [fsx\_skip\_final\_backup](#input\_fsx\_skip\_final\_backup) | Skip final FSx backup? | `bool` | `true` | no |
 | <a name="input_fsx_storage_capacity"></a> [fsx\_storage\_capacity](#input\_fsx\_storage\_capacity) | FSx Storage capacity | `number` | `32` | no |
 | <a name="input_fsx_storage_type"></a> [fsx\_storage\_type](#input\_fsx\_storage\_type) | FSx storage type | `string` | `"SSD"` | no |
@@ -78,6 +79,7 @@ No modules.
 | [aws_kms_alias.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
 | [aws_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_security_group.fsx](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_ssm_parameter.fsx_ip_address](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [random_password.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
