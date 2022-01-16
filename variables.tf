@@ -43,7 +43,7 @@ variable "fsx_file_system_name" {
   default     = "file-system"
 }
 
-variable "fsx_ip_address_ssm_param_name" {
+variable "fsx_ip_address_ssm_parameter_name" {
   type        = string
   description = "Name of SSM parameter to store the file system IP address"
   default     = "/fsx/ip-address"
