@@ -5,15 +5,33 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
+locals {
+  ssm_parameter_name_ad_domain   = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_domain}"
+  ssm_parameter_name_ad_username = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_username}"
+  ssm_parameter_name_ad_password = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_password}"
+}
+
 resource "random_password" "this" {
   length  = 32
   special = true
 }
 
 resource "aws_ssm_parameter" "password" {
-  name  = var.ad_password_ssm_parameter_name
+  name  = local.ssm_parameter_name_ad_password
   type  = "SecureString"
   value = random_password.this.result
+}
+
+resource "aws_ssm_parameter" "username" {
+  name  = local.ssm_parameter_name_ad_username
+  type  = "SecureString"
+  value = "admin"
+}
+
+resource "aws_ssm_parameter" "domain" {
+  name  = local.ssm_parameter_name_ad_domain
+  type  = "SecureString"
+  value =  var.ad_name
 }
 
 resource "aws_directory_service_directory" "this" {
@@ -31,7 +49,7 @@ resource "aws_directory_service_directory" "this" {
 
 resource "aws_cloudwatch_log_group" "ad" {
   name              = "/aws/directoryservice/${aws_directory_service_directory.this.id}"
-  retention_in_days = 14
+  retention_in_days = var.ad_log_retention_in_days
 }
 
 data "aws_iam_policy_document" "ad_logs" {

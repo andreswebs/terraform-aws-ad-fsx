@@ -13,10 +13,34 @@ variable "ad_name" {
   description = "AD name (FQDN), in the format `directory.example.com`"
 }
 
-variable "ad_password_ssm_parameter_name" {
+variable "ad_log_retention_in_days" {
+  type        = number
+  description = "AD log retention in days"
+  default     = 30
+}
+
+variable "ad_ssm_prefix" {
+  type        = string
+  description = "SSM prefix for AD"
+  default     = "/ad"
+}
+
+variable "ad_ssm_parameter_name_domain" {
+  type        = string
+  description = "Name of SSM parameter to store the AD domain name"
+  default     = "/domain"
+}
+
+variable "ad_ssm_parameter_name_username" {
   type        = string
   description = "Name of SSM parameter to store the AD administrator password"
-  default     = "/ad/password"
+  default     = "/username"
+}
+
+variable "ad_ssm_parameter_name_password" {
+  type        = string
+  description = "Name of SSM parameter to store the AD administrator password"
+  default     = "/password"
 }
 
 variable "kms_key_deletion_window_in_days" {
@@ -50,9 +74,9 @@ variable "fsx_ip_address_ssm_parameter_name" {
 }
 
 variable "fsx_deployment_type" {
-  type = string
+  type        = string
   description = "FSx deployment type"
-  default = "SINGLE_AZ_2"
+  default     = "SINGLE_AZ_2"
   validation {
     condition     = can(regex("^SINGLE_AZ_1|SINGLE_AZ_2|MULTI_AZ_1$", var.fsx_deployment_type))
     error_message = "Must be one of `SINGLE_AZ_1` or `SINGLE_AZ_2` or `MULTI_AZ_1`."
@@ -60,13 +84,13 @@ variable "fsx_deployment_type" {
 }
 
 variable "fsx_storage_type" {
-  type = string
+  type        = string
   description = "FSx storage type"
-  default = "SSD"
-   validation {
+  default     = "SSD"
+  validation {
     condition     = can(regex("^SSD|HDD$", var.fsx_storage_type))
     error_message = "Must be one of `SSD` or `HDD`."
-  } 
+  }
 }
 
 variable "fsx_skip_final_backup" {
