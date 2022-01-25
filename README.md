@@ -27,14 +27,16 @@ module "fsx" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_ad_log_retention_in_days"></a> [ad\_log\_retention\_in\_days](#input\_ad\_log\_retention\_in\_days) | AD log retention in days | `number` | `30` | no |
 | <a name="input_ad_name"></a> [ad\_name](#input\_ad\_name) | AD name (FQDN), in the format `directory.example.com` | `string` | n/a | yes |
+| <a name="input_ad_ssm_parameter_name_dns_servers"></a> [ad\_ssm\_parameter\_name\_dns\_servers](#input\_ad\_ssm\_parameter\_name\_dns\_servers) | Name of SSM parameter to store the AD domain controller IPs (DNS servers) | `string` | `"/dns-servers"` | no |
 | <a name="input_ad_ssm_parameter_name_domain"></a> [ad\_ssm\_parameter\_name\_domain](#input\_ad\_ssm\_parameter\_name\_domain) | Name of SSM parameter to store the AD domain name | `string` | `"/domain"` | no |
 | <a name="input_ad_ssm_parameter_name_password"></a> [ad\_ssm\_parameter\_name\_password](#input\_ad\_ssm\_parameter\_name\_password) | Name of SSM parameter to store the AD administrator password | `string` | `"/password"` | no |
 | <a name="input_ad_ssm_parameter_name_username"></a> [ad\_ssm\_parameter\_name\_username](#input\_ad\_ssm\_parameter\_name\_username) | Name of SSM parameter to store the AD administrator password | `string` | `"/username"` | no |
 | <a name="input_ad_ssm_prefix"></a> [ad\_ssm\_prefix](#input\_ad\_ssm\_prefix) | SSM prefix for AD | `string` | `"/ad"` | no |
 | <a name="input_fsx_deployment_type"></a> [fsx\_deployment\_type](#input\_fsx\_deployment\_type) | FSx deployment type | `string` | `"SINGLE_AZ_2"` | no |
 | <a name="input_fsx_file_system_name"></a> [fsx\_file\_system\_name](#input\_fsx\_file\_system\_name) | Name of the FSx Windows file system | `string` | `"file-system"` | no |
-| <a name="input_fsx_ip_address_ssm_parameter_name"></a> [fsx\_ip\_address\_ssm\_parameter\_name](#input\_fsx\_ip\_address\_ssm\_parameter\_name) | Name of SSM parameter to store the file system IP address | `string` | `"/fsx/ip-address"` | no |
 | <a name="input_fsx_skip_final_backup"></a> [fsx\_skip\_final\_backup](#input\_fsx\_skip\_final\_backup) | Skip final FSx backup? | `bool` | `true` | no |
+| <a name="input_fsx_ssm_parameter_name_ip_address"></a> [fsx\_ssm\_parameter\_name\_ip\_address](#input\_fsx\_ssm\_parameter\_name\_ip\_address) | Name of SSM parameter to store the file system IP address | `string` | `"/ip-address"` | no |
+| <a name="input_fsx_ssm_prefix"></a> [fsx\_ssm\_prefix](#input\_fsx\_ssm\_prefix) | SSM parameters prefix for FSx | `string` | `"/fsx"` | no |
 | <a name="input_fsx_storage_capacity"></a> [fsx\_storage\_capacity](#input\_fsx\_storage\_capacity) | FSx Storage capacity | `number` | `32` | no |
 | <a name="input_fsx_storage_type"></a> [fsx\_storage\_type](#input\_fsx\_storage\_type) | FSx storage type | `string` | `"SSD"` | no |
 | <a name="input_fsx_throughput_capacity"></a> [fsx\_throughput\_capacity](#input\_fsx\_throughput\_capacity) | FSx throughput capacity | `number` | `8` | no |
@@ -83,6 +85,7 @@ No modules.
 | [aws_kms_alias.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
 | [aws_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_security_group.fsx](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_ssm_parameter.dns_servers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.fsx_ip_address](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |

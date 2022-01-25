@@ -5,33 +5,9 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
-locals {
-  ssm_parameter_name_ad_domain   = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_domain}"
-  ssm_parameter_name_ad_username = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_username}"
-  ssm_parameter_name_ad_password = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_password}"
-}
-
 resource "random_password" "this" {
   length  = 32
   special = true
-}
-
-resource "aws_ssm_parameter" "password" {
-  name  = local.ssm_parameter_name_ad_password
-  type  = "SecureString"
-  value = random_password.this.result
-}
-
-resource "aws_ssm_parameter" "username" {
-  name  = local.ssm_parameter_name_ad_username
-  type  = "SecureString"
-  value = "admin"
-}
-
-resource "aws_ssm_parameter" "domain" {
-  name  = local.ssm_parameter_name_ad_domain
-  type  = "SecureString"
-  value =  var.ad_name
 }
 
 resource "aws_directory_service_directory" "this" {
@@ -181,8 +157,46 @@ resource "aws_fsx_windows_file_system" "this" {
 
 }
 
+
+/*
+* SSM parameters
+*/
+locals {
+  ssm_parameter_name_ad_domain      = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_domain}"
+  ssm_parameter_name_ad_username    = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_username}"
+  ssm_parameter_name_ad_password    = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_password}"
+  ssm_parameter_name_ad_dns_servers = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_dns_servers}"
+  ssm_parameter_name_fsx_ip_address = "${var.fsx_ssm_prefix}${var.fsx_ssm_parameter_name_dns_servers}"
+}
+
+resource "aws_ssm_parameter" "dns_servers" {
+  name  = local.ssm_parameter_name_ad_dns_servers
+  type  = "SecureString"
+  value = aws_directory_service_directory.this.dns_ip_addresses
+}
+
+resource "aws_ssm_parameter" "password" {
+  name  = local.ssm_parameter_name_ad_password
+  type  = "SecureString"
+  value = random_password.this.result
+}
+
+resource "aws_ssm_parameter" "username" {
+  depends_on = [aws_directory_service_directory.this]
+  name       = local.ssm_parameter_name_ad_username
+  type       = "SecureString"
+  value      = "admin"
+}
+
+resource "aws_ssm_parameter" "domain" {
+  name  = local.ssm_parameter_name_ad_domain
+  type  = "SecureString"
+  value = var.ad_name
+}
+
 resource "aws_ssm_parameter" "fsx_ip_address" {
-  name  = var.fsx_ip_address_ssm_parameter_name
+  name  = local.ssm_parameter_name_fsx_ip_address
   type  = "SecureString"
   value = base64encode(aws_fsx_windows_file_system.this.preferred_file_server_ip)
 }
+/* end SSM parameters */

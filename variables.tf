@@ -43,6 +43,12 @@ variable "ad_ssm_parameter_name_password" {
   default     = "/password"
 }
 
+variable "ad_ssm_parameter_name_dns_servers" {
+  type        = string
+  description = "Name of SSM parameter to store the AD domain controller IPs (DNS servers)"
+  default     = "/dns-servers"
+}
+
 variable "kms_key_deletion_window_in_days" {
   type        = number
   description = "KMS key deletion window in days"
@@ -67,10 +73,16 @@ variable "fsx_file_system_name" {
   default     = "file-system"
 }
 
-variable "fsx_ip_address_ssm_parameter_name" {
+variable "fsx_ssm_prefix" {
+  type        = string
+  description = "SSM parameters prefix for FSx"
+  default     = "/fsx"
+}
+
+variable "fsx_ssm_parameter_name_ip_address" {
   type        = string
   description = "Name of SSM parameter to store the file system IP address"
-  default     = "/fsx/ip-address"
+  default     = "/ip-address"
 }
 
 variable "fsx_deployment_type" {
