@@ -172,7 +172,7 @@ locals {
 resource "aws_ssm_parameter" "dns_servers" {
   name  = local.ssm_parameter_name_ad_dns_servers
   type  = "SecureString"
-  value = aws_directory_service_directory.this.dns_ip_addresses
+  value = join(",", aws_directory_service_directory.this.dns_ip_addresses)
 }
 
 resource "aws_ssm_parameter" "password" {
@@ -191,7 +191,7 @@ resource "aws_ssm_parameter" "username" {
 resource "aws_ssm_parameter" "domain" {
   name  = local.ssm_parameter_name_ad_domain
   type  = "SecureString"
-  value = var.ad_name
+  value = aws_directory_service_directory.this.name
 }
 
 resource "aws_ssm_parameter" "fsx_ip_address" {
