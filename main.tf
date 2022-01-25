@@ -166,7 +166,7 @@ locals {
   ssm_parameter_name_ad_username    = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_username}"
   ssm_parameter_name_ad_password    = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_password}"
   ssm_parameter_name_ad_dns_servers = "${var.ad_ssm_prefix}${var.ad_ssm_parameter_name_dns_servers}"
-  ssm_parameter_name_fsx_ip_address = "${var.fsx_ssm_prefix}${var.fsx_ssm_parameter_name_dns_servers}"
+  ssm_parameter_name_fsx_ip_address = "${var.fsx_ssm_prefix}${var.fsx_ssm_parameter_name_ip_address}"
 }
 
 resource "aws_ssm_parameter" "dns_servers" {
